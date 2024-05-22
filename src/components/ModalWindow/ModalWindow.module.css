@@ -1,0 +1,29 @@
+.containerModal {
+  width: 400px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  padding: 20px 30px;
+  border: 1px solid #393939;
+  border-radius: 5px;
+  text-align: center;
+  box-shadow: 5px 5px 8px 5px rgba(0, 0, 0, 0.2),
+    5px 6px 20px 5px rgba(0, 0, 0, 0.3);
+}
+.closeModal {
+  padding: 5px;
+  background-color: transparent;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  color: rgb(80, 81, 81);
+  justify-content: center;
+  align-items: center;
+}
+.deleteBut {
+  border: 1px solid #6c6c6c;
+  display: flex;
+}

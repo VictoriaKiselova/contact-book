@@ -24,9 +24,15 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  padding: 15px;
 
+  background-image: linear-gradient(
+      rgba(215, 216, 228, 0.3),
+      rgba(164, 165, 190, 0.3)
+    ),
+    url("image/3d-stack-books_23-2151103673.jpg");
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-size: cover;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -49,6 +55,8 @@ button {
 }
 button:hover {
   border-color: #646cff;
+  background-color: #747bff;
+  color: #ffffff;text-shadow: 1px 1px 1px #060606;
 }
 button:focus,
 button:focus-visible {

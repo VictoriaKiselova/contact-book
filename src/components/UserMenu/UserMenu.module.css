@@ -1,0 +1,32 @@
+.welcome {
+  font-weight: bold;
+  text-align: left;
+  font-size: 22px;
+  margin: 0;
+  flex-wrap: nowrap;
+}
+.containerUserMenu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.exit {
+  display: flex;
+  border: 1px solid #000;
+  border-radius: 5px;
+  padding: 5px 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  color: #000000;
+  background-color: rgb(246, 245, 245);
+  text-shadow: 2px 2px 4px #b9b9b9;
+  font-size: 22px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.exit:hover {
+  background-color: #6c70e8;
+  color: #fff;
+  text-shadow: 2px 2px 4px #0e0e0e;
+}
