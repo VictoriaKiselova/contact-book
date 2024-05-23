@@ -21,7 +21,6 @@ export const register = createAsyncThunk(
 export const logIn = createAsyncThunk(
   "auth/login",
   async (userInfo, thunkAPI) => {
-    console.log(userInfo);
     try {
       const response = await axios.post("/users/login", userInfo);
       axios.defaults.headers.common[
@@ -52,7 +51,6 @@ export const refreshUser = createAsyncThunk(
     axios.defaults.headers.common["Authorization"] = `Bearer ${savedToken}`;
 
     const response = await axios.get("/users/current");
-    console.log(response.data);
     return response.data;
   },
   {

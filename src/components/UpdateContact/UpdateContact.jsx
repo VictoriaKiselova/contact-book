@@ -1,12 +1,12 @@
-import Modal from "react-modal";
-import { ImCross } from "react-icons/im";
-import css from "./UpdateContact.module.css";
-import { Formik, Form, Field, ErrorMessage } from "formik";
 import { nanoid } from "nanoid";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import { useDispatch } from "react-redux";
+import { ImCross } from "react-icons/im";
+import { updateContact } from "../../redux/contacts/operations";
 import * as Yup from "yup";
-// import {updateContact} from '../../redux/contacts/operations'
-// import { useDispatch } from "react-redux";
-// import toast from "react-hot-toast";
+import Modal from "react-modal";
+import toast from "react-hot-toast";
+import css from "./UpdateContact.module.css";
 
 Modal.setAppElement("#root");
 const contactSchema = Yup.object().shape({
@@ -27,9 +27,9 @@ const contactSchema = Yup.object().shape({
 export default function UpdateContact({
   isUpdate,
   setIsUpdate,
-  //   valuesContacts,
+  valuesContacts,
 }) {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const customStyles = {
     content: {
       color: "#fff",
@@ -44,27 +44,27 @@ export default function UpdateContact({
     },
   };
 
-  //   const handleChange = (values, actions) => {
-  //     dispatch(updateContact(values))
-  //       .unwrap()
-  //       .then(() => {
-  //         toast.success("Сontact changed!", {
-  //           style: {
-  //             marginTop: "85px",
-  //             backgroundColor: "rgb(219, 137, 204)",
-  //             color: "#fff",
-  //             borderRadius: "20px 0",
-  //             border: "1px solid green",
-  //             padding: "10px",
-  //           },
-  //         });
-  //       })
-  //       .catch(error => {
-  //         console.log(error);
-  //       });
-  //       setIsUpdate(false);
-  //     actions.resetForm();
-  //   };
+  const handleChange = (values, actions) => {
+    dispatch(updateContact(values))
+      .unwrap()
+      .then(() => {
+        toast.success("Сontact changed!", {
+          style: {
+            marginTop: "85px",
+            backgroundColor: "rgb(219, 137, 204)",
+            color: "#fff",
+            borderRadius: "20px 0",
+            border: "1px solid green",
+            padding: "10px",
+          },
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    setIsUpdate(false);
+    actions.resetForm();
+  };
 
   return (
     <div>
@@ -77,19 +77,13 @@ export default function UpdateContact({
         </button>
         <h3 className={css.updatetitle}>Enter new data to change contact </h3>
         <Formik
-          initialValues={{ id: "", name: "", number: "" }}
+          initialValues={valuesContacts}
           validationSchema={contactSchema}
-          //   onSubmit={handleChange}
-        >
+          onSubmit={handleChange}>
           <Form className={css.formUpdateContact}>
             <label htmlFor={nanoid()} className={css.label}>
               Name
-              <Field
-                name="name"
-                id={nanoid()}
-                className={css.input}
-                //   value={valuesContacts.name}
-              />
+              <Field name="name" id={nanoid()} className={css.input} />
               <ErrorMessage
                 name="name"
                 className={css.error}
@@ -103,7 +97,6 @@ export default function UpdateContact({
                 name="number"
                 id={nanoid()}
                 className={css.input}
-                // value={valuesContacts.number}
               />
               <ErrorMessage
                 name="number"

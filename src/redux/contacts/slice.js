@@ -3,7 +3,7 @@ import {
   fetchContacts,
   addContact,
   deleteContact,
-  // updateContact
+  updateContact,
 } from "../../redux/contacts/operations";
 import { logOut } from "../auth/operations";
 
@@ -13,13 +13,7 @@ const contactsSlice = createSlice({
     items: [],
     loading: false,
     error: null,
-    // isModalOpen: false,
-  }, 
-  // reducers: {
-  //   setIsModalOpen(state, action) {
-  //     state.isModalOpen = action.payload;
-  //   },
-  // },
+  },
   extraReducers: builder =>
     builder
       .addCase(fetchContacts.pending, state => {
@@ -62,20 +56,24 @@ const contactsSlice = createSlice({
         state.items = [];
         state.error = null;
         state.loading = false;
-       })
-      // .addCase(updateContact.pending, state => {
-      //   state.error = null;
-      //   state.loading = true;
-      // })
-      // .addCase(updateContact.fulfilled, (state, action) => {
-      //   state.loading = false;
-      //   // const updateContact = state.items.find(elem => elem.id === action.payload.id);
-
-      // })
-      // .addCase(updateContact.rejected, state => {
-      //   state.error = true;
-      //   state.loading = false;
-      // })
+      })
+      .addCase(updateContact.pending, state => {
+        state.error = null;
+        state.loading = true;
+      })
+      .addCase(updateContact.fulfilled, (state, action) => {
+        state.loading = false;
+        const updatedContactIndex = state.items.findIndex(
+          elem => elem.id === action.payload.id
+        );
+        if (updatedContactIndex !== -1) {
+          state.items[updatedContactIndex] = action.payload;
+        }
+      })
+      .addCase(updateContact.rejected, state => {
+        state.error = true;
+        state.loading = false;
+      }),
 });
-// export const { setIsModalOpen } = contactsSlice.actions;
+
 export default contactsSlice.reducer;

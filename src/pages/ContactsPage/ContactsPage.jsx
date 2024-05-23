@@ -1,10 +1,12 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useEffect, useState } from "react";
-import { ImUser } from "react-icons/im";
-import { ImPencil } from "react-icons/im";
-import { ImPhone } from "react-icons/im";
-import { ImUserPlus } from "react-icons/im";
-import { ImUserMinus } from "react-icons/im";
+import {
+  ImUser,
+  ImPencil,
+  ImPhone,
+  ImUserPlus,
+  ImUserMinus,
+} from "react-icons/im";
 import { nanoid } from "nanoid";
 import { useDispatch, useSelector } from "react-redux";
 import { changeFilter } from "../../redux/filters/slice.js";
@@ -13,13 +15,11 @@ import {
   selectFilters,
   selectFilteredContacts,
 } from "../../redux/filters/selectors.js";
+import ModalWindow from "../../components/ModalWindow/ModalWindow.jsx";
+import UpdateContact from "../../components/UpdateContact/UpdateContact.jsx";
 import * as Yup from "yup";
 import toast from "react-hot-toast";
 import css from "../ContactsPage/ContactsPage.module.css";
-// import { setIsModalOpen } from "../../redux/contacts/slice.js";
-import ModalWindow from "../../components/ModalWindow/ModalWindow.jsx";
-// import { modal } from "../../redux/contacts/selectors";
-import UpdateContact from "../../components/UpdateContact/UpdateContact.jsx";
 
 const contactSchema = Yup.object().shape({
   name: Yup.string()
@@ -42,10 +42,8 @@ export default function ContactsPage() {
   const contacts = useSelector(selectFilteredContacts);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [idToDelete, setIdToDelete] = useState(null);
-
   const [isUpdate, setIsUpdate] = useState(false);
   const [valuesContacts, setValuesContacts] = useState(null);
- 
 
   useEffect(() => {
     dispatch(fetchContacts());
@@ -75,13 +73,11 @@ export default function ContactsPage() {
 
   const openModal = id => {
     setIdToDelete(id);
-    // console.log(id);
     setIsModalOpen(true);
   };
 
   const updateModal = elem => {
-    // setValuesContacts(elem);
-    console.log(elem);
+    setValuesContacts(elem);
     setIsUpdate(true);
   };
 
@@ -98,7 +94,7 @@ export default function ContactsPage() {
         <UpdateContact
           isUpdate={isUpdate}
           setIsUpdate={setIsUpdate}
-          // valuesContacts={valuesContacts}
+          valuesContacts={valuesContacts}
         />
       )}
       <h1 className={css.phonebook}> Phonebook </h1>
@@ -161,7 +157,7 @@ export default function ContactsPage() {
               <button
                 className={css.changeButton}
                 type="submit"
-                onClick={updateModal(elem)}>
+                onClick={() => updateModal(elem)}>
                 <ImPencil />
               </button>
 

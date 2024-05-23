@@ -30,6 +30,7 @@ body {
       rgba(164, 165, 190, 0.3)
     ),
     url("image/3d-stack-books_23-2151103673.jpg");
+  background-attachment: fixed;
   background-repeat: no-repeat;
   background-position: left top;
   background-size: cover;
@@ -43,8 +44,6 @@ h1 {
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
@@ -56,11 +55,8 @@ button {
 button:hover {
   border-color: #646cff;
   background-color: #747bff;
-  color: #ffffff;text-shadow: 1px 1px 1px #060606;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  color: #ffffff;
+  text-shadow: 1px 1px 1px #060606;
 }
 
 @media (prefers-color-scheme: light) {

@@ -25,7 +25,8 @@
   top: 5px;
   right: 5px;
   color: rgb(80, 81, 81);
-
+  border-radius: 5px;
+  border: none;
   justify-content: center;
   align-items: center;
 }

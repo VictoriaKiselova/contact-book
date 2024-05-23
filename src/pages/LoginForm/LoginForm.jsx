@@ -1,10 +1,10 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
-import * as Yup from "yup";
-import { nanoid } from "nanoid";
-import css from "./LoginForm.module.css";
 import { logIn } from "../../redux/auth/operations";
+import { nanoid } from "nanoid";
+import { toast } from "react-hot-toast";
+import * as Yup from "yup";
+import css from "./LoginForm.module.css";
 
 const contactSchema = Yup.object().shape({
   email: Yup.string().email().min(5, "Min 5 chars!").required("is required!"),
@@ -45,13 +45,18 @@ export default function LoginForm() {
         <Form className={css.form}>
           <label htmlFor={nanoid()} className={css.label}>
             Email
-            <Field name="email" id={nanoid()} className={css.input} />
+            <Field
+              type="email"
+              name="email"
+              id={nanoid()}
+              className={css.input}
+            />
             <ErrorMessage name="email" className={css.error} component="span" />
           </label>
           <label htmlFor={nanoid()} className={css.label}>
             Password
             <Field
-              type="text"
+              type="password"
               name="password"
               id={nanoid()}
               className={css.input}

@@ -1,10 +1,10 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useDispatch } from "react-redux";
+import { register } from "../../redux/auth/operations";
+import { nanoid } from "nanoid";
 import { toast } from "react-hot-toast";
 import * as Yup from "yup";
-import { nanoid } from "nanoid";
 import css from "./RegistrationForm.module.css";
-import { register } from "../../redux/auth/operations";
 
 const contactSchema = Yup.object().shape({
   name: Yup.string()
@@ -18,7 +18,6 @@ const contactSchema = Yup.object().shape({
 export default function RegistrationForm() {
   const dispatch = useDispatch();
   const handleSubmit = (values, actions) => {
-    console.log(values);
     dispatch(register(values))
       .unwrap()
       .then(() => {
@@ -60,7 +59,7 @@ export default function RegistrationForm() {
           <label htmlFor={nanoid()} className={css.label}>
             Password
             <Field
-              type="text"
+              type="password"
               name="password"
               id={nanoid()}
               className={css.input}

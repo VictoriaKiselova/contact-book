@@ -1,9 +1,9 @@
-import Modal from "react-modal";
 import { ImCross } from "react-icons/im";
 import { useDispatch } from "react-redux";
 import { deleteContact } from "../../redux/contacts/operations.js";
-import css from "./ModalWindow.module.css";
+import Modal from "react-modal";
 import toast from "react-hot-toast";
+import css from "./ModalWindow.module.css";
 
 Modal.setAppElement("#root");
 export default function ModalWindow({
@@ -31,7 +31,7 @@ export default function ModalWindow({
       .catch(error => {
         console.log(error);
       });
-    dispatch(setIsModalOpen(false));
+    setIsModalOpen(false);
   };
 
   const customStyles = {
