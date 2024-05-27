@@ -58,6 +58,12 @@ button:hover {
   color: #ffffff;
   text-shadow: 1px 1px 1px #060606;
 }
+input{
+  background-color: #fff;
+}
+input:focus{
+  background-color: #fff;
+}
 
 @media (prefers-color-scheme: light) {
   :root {

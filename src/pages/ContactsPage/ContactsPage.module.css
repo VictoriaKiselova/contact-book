@@ -38,6 +38,7 @@
   font-size: 24px;
   font-weight: 500;
   letter-spacing: 0.02em;
+  color: #000;
 }
 .input {
   padding: 5px 10px;
@@ -62,7 +63,6 @@
 }
 .container {
   background-color: #fff;
-
   display: flex;
   gap: 30px;
   align-items: center;
@@ -99,6 +99,7 @@
   letter-spacing: 0.02em;
   margin: 0;
   width: 300px;
+  color: #000;
 }
 .buttonBox {
   display: flex;
@@ -129,6 +130,7 @@
   letter-spacing: 0.02em;
   border-radius: 4px;
   box-shadow: 5px 5px 8px 5px rgba(0, 0, 0, 0.1);
+  color: #000;
 }
 .button:hover {
   text-shadow: 1px 1px 1px #000000;
