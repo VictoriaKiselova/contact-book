@@ -73,7 +73,7 @@ export default function UpdateContact({
         style={customStyles}
         className={css.containerModal}>
         <button className={css.closeModal} onClick={() => setIsUpdate(false)}>
-          <ImCross />
+          <ImCross className={css.closeIcon} />
         </button>
         <h3 className={css.updatetitle}>Enter new data to change contact </h3>
         <Formik

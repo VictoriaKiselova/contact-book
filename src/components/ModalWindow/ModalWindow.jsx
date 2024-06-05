@@ -56,7 +56,7 @@ export default function ModalWindow({
         <button
           className={css.closeModal}
           onClick={() => setIsModalOpen(false)}>
-          <ImCross />
+          <ImCross className={css.closeIcon} />
         </button>
         <b>Are you sure you want to delete the contact?</b>
         <button className={css.deleteBut} onClick={handleDelete}>

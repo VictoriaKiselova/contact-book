@@ -70,7 +70,7 @@ export default function RegistrationForm() {
               component="span"
             />
           </label>
-          <button type="submit" className={css.buttonAdd}>
+          <button type="submit" className={css.buttonRegistr}>
             Register
           </button>
         </Form>

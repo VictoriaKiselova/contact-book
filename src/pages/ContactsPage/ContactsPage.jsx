@@ -24,7 +24,7 @@ import css from "../ContactsPage/ContactsPage.module.css";
 const contactSchema = Yup.object().shape({
   name: Yup.string()
     .min(3, "Min 3 chars!")
-    .max(50, "Max 50 chars!")
+    .max(11, "Max 11 chars!")
     .required("is required!"),
   number: Yup.string()
     .matches(
@@ -141,7 +141,6 @@ export default function ContactsPage() {
 
       <div className={css.contactListWrapper}>
         {contacts.map(elem => (
-          // console.log(elem),
           <ul key={elem.id} className={css.container}>
             <li className={css.contactItem}>
               <p className={css.elements}>
@@ -158,7 +157,7 @@ export default function ContactsPage() {
                 className={css.changeButton}
                 type="submit"
                 onClick={() => updateModal(elem)}>
-                <ImPencil />
+                <ImPencil className={css.iconChange} />
               </button>
 
               <button
@@ -166,7 +165,7 @@ export default function ContactsPage() {
                 className={css.button}
                 type="submit"
                 onClick={() => openModal(elem.id)}>
-                <ImUserMinus /> Delete
+                <ImUserMinus className={css.iconsUser} /> Delete
               </button>
             </div>
           </ul>

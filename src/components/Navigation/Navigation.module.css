@@ -1,12 +1,12 @@
 .containerNav {
   display: flex;
-  gap: 15px;
+  gap: 5px;
 }
 .nav {
   background-color: #f2f2f2;
   border-radius: 5px;
-  padding: 5px 10px;
-  font-size: 26px;
+  padding: 4px;
+  font-size: 18px;
   font-weight: 700;
   color: #000000;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -15,4 +15,24 @@
   background-color: #6c70e8;
   color: #fff;
   text-shadow: 2px 2px 4px #0e0e0e;
+}
+
+@media screen and (min-width: 768px) {
+  .containerNav {
+    gap: 7px;
+  }
+  .nav {
+    padding: 5px 8px;
+    font-size: 22px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .containerNav {
+    gap: 10px;
+  }
+  .nav {
+    padding: 5px 10px;
+    font-size: 26px;
+  }
 }

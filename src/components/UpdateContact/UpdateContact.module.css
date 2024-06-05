@@ -4,13 +4,13 @@
   margin: 0;
 }
 .containerModal {
-  width: 400px;
+  width: 300px;
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 14px;
+  gap: 5px;
   padding: 30px 30px;
   border: 1px solid #393939;
   border-radius: 5px;
@@ -24,18 +24,22 @@
   position: absolute;
   top: 5px;
   right: 5px;
-  color: rgb(80, 81, 81);
   border-radius: 5px;
   border: none;
   justify-content: center;
   align-items: center;
+}
+.closeIcon {
+  width: 16px;
+  height: 16px;
+  fill: #e2e2e2;
 }
 .formUpdateContact {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 15px;
+  gap: 5px;
 }
 .label {
   display: flex;
@@ -51,23 +55,48 @@
 }
 .input {
   padding: 5px 10px;
-  width: 350px;
-  font-size: 24px;
-  font-weight: 500;
+  width: 270px;
+  font-size: 22px;
+  font-weight: 400;
   letter-spacing: 0.02em;
+  color: #000;
+  border: 1px solid #6c6c6c;
 }
 .buttonUpdate {
   background-color: #f1f1f1;
+  color: #000;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 10px;
-  border: 1px solid black;
+  border: 1px solid #6c6c6c;
   border-radius: 3px;
-  padding: 10px;
-  font-size: 24px;
+  padding: 8px;
+  font-size: 22px;
   font-weight: 500;
   border-radius: 5px;
   letter-spacing: 0.02em;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2), 5px 6px 5px rgba(0, 0, 0, 0.1);
+  margin-top: 5px;
+}
+@media screen and (min-width: 768px) {
+  .containerModal {
+    width: 400px;
+  }
+  .input {
+    width: 320px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .containerModal {
+    width: 450px;
+  }
+  .input {
+    width: 380px;
+    padding: 8px;
+  }
+  .buttonUpdate {
+    padding: 10px;
+  }
 }

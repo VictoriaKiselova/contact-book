@@ -1,15 +1,22 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  position: relative;
+}
 .authNav {
-  font-size: 26px;
+  font-size: 18px;
   font-weight: 700;
   color: #000000;
   text-shadow: 0 0 1px #ffffff;
 }
 .authNav:first-child::after {
-  margin-left: 15px;
-  top: 10px;
+  margin: 0 10px;
+  top: 6px;
   position: absolute;
   content: "";
-  height: 26px;
+  height: 18px;
   width: 2px;
   background-color: #515151;
 }
@@ -17,10 +24,31 @@
   color: #ffffff;
   text-shadow: 2px 2px 4px #000000;
 }
-.container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 30px;
-  position: relative;
+
+@media screen and (min-width: 768px) {
+  .authNav {
+    font-size: 22px;
+  }
+  .authNav:first-child::after {
+    top: 8px;
+    height: 22px;
+  }
+  .authNav:hover {
+    color: #ffffff;
+    text-shadow: 2px 2px 4px #000000;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .container {
+    gap: 30px;
+  }
+  .authNav {
+    font-size: 26px;
+  }
+  .authNav:first-child::after {
+    margin: 0 15px;
+    top: 10px;
+    height: 26px;
+  }
 }

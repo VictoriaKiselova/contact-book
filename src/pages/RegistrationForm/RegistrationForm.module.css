@@ -1,39 +1,83 @@
 .form {
   background-color: #f2f2f2;
-  width: 450px;
-  border: 1px solid black;
+  width: 300px;
   border-radius: 5px;
-  padding: 15px 15px 20px 15px;
+  padding: 10px 10px 15px 10px;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 3px;
   box-shadow: 5px 5px 8px 5px rgba(0, 0, 0, 0.2),
     5px 6px 20px 5px rgba(0, 0, 0, 0.2);
 }
 .label {
   display: flex;
+  color: #474646;
   flex-direction: column;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 500;
   letter-spacing: 0.02em;
 }
 .error {
   color: red;
 }
-.buttonAdd {
-  background-color: #fff;
-  border: 1px solid black;
+.buttonRegistr {
+  background-color: #fffefe;
+  border: 1px solid gray;
+  color: #000000;
   border-radius: 3px;
   padding: 10px;
   font-size: 20px;
   font-weight: 500;
   letter-spacing: 0.02em;
+  margin-top: 3px;
 }
 .input {
-  padding: 8px 10px;
-  font-size: 22px;
+  padding: 5px 8px;
+  font-size: 18px;
+  color: #000000;
+  border: 1px solid gray;
 }
 .title {
+  margin: 0 0 10px 0;
+  font-size: 20px;
   text-align: left;
   color: #000000;
+}
+@media screen and (min-width: 768px) {
+  .title {
+    margin: 0 0 12px 0;
+    font-size: 22px;
+  }
+  .form {
+    width: 400px;
+  }
+  .label {
+    font-size: 18px;
+  }
+  .buttonRegistr {
+    font-size: 22px;
+    margin-top: 3px;
+  }
+  .input {
+    padding: 7px 8px;
+    font-size: 20px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .form {
+    width: 450px;
+    border: 1px solid #474646;
+    padding: 15px 15px 20px 15px;
+  }
+  .label {
+    font-size: 20px;
+  }
+  .buttonRegistr {
+    margin-top: 5px;
+  }
+
+  .input {
+    padding: 8px 10px;
+  }
 }

@@ -1,6 +1,22 @@
 .layoutContainer {
-  padding: 20px 40px;
+  min-width: 320px;
+  padding: 8px 10px;
   display: flex;
   flex-direction: column;
   gap: 30px;
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 768px) {
+  .layoutContainer {
+    min-width: 768px;
+    padding: 20px 30px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .layoutContainer {
+    min-width: 1200px;
+    padding: 20px 40px;
+  }
 }

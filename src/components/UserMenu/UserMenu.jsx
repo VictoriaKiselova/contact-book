@@ -15,7 +15,7 @@ export default function UserMenu() {
     <div className={css.containerUserMenu}>
       <p className={css.welcome}>Welcome, {user.name}</p>
       <Link className={css.exit} onClick={handleLogout} to="/">
-        <IoMdExit /> Logout
+        <IoMdExit /> <span className={css.logOut}>Logout</span>
       </Link>
     </div>
   );

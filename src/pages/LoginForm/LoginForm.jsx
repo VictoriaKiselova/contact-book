@@ -67,7 +67,7 @@ export default function LoginForm() {
               component="span"
             />
           </label>
-          <button type="submit" className={css.buttonAdd}>
+          <button type="submit" className={css.buttonLogin}>
             Log In
           </button>
         </Form>

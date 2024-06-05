@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { refreshUser } from "../../redux/auth/operations.js";
 import { selectIsRefreshing } from "../../redux/auth/selectors.js";
+import "modern-normalize/modern-normalize.css";
 import Layout from "../Layout/Layout.jsx";
 import RestrictedRoute from "../RestrictedRoute.jsx";
 import PrivateRoute from "../PrivateRoute.jsx";
@@ -14,7 +15,7 @@ const HomePage = lazy(() => import("../../pages/HomePage/HomePage.jsx"));
 const ContactsPage = lazy(() =>
   import("../../pages/ContactsPage/ContactsPage.jsx")
 );
-const NotFoundPage = lazy(()=> import("../NotFoundPage/NotFoundPage.jsx"))
+const NotFoundPage = lazy(() => import("../NotFoundPage/NotFoundPage.jsx"));
 
 export default function App() {
   const dispatch = useDispatch();
@@ -55,7 +56,7 @@ export default function App() {
               <PrivateRoute component={<ContactsPage />} redirectTo="/login" />
             }
           />
-           <Route path="*" element={<NotFoundPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
     </Layout>

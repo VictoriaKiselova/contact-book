@@ -1,19 +1,16 @@
 .notFoundContainer {
-  padding: 15px;
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  justify-content: center;
-  font-size: 26px;
+  padding: 5px;
+  font-size: 24px;
   font-weight: 500;
 }
 .message {
-  font-size: 26px;
+  display: inline;
+  font-size: 24px;
   font-weight: 500;
   margin: 0;
 }
 .linkHome {
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 500;
   color: blue;
 }

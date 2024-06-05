@@ -24,18 +24,7 @@ a:hover {
 
 body {
   margin: 0;
-
-  background-image: linear-gradient(
-      rgba(215, 216, 228, 0.3),
-      rgba(164, 165, 190, 0.3)
-    ),
-    url("image/3d-stack-books_23-2151103673.jpg");
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-position: left top;
-  background-size: cover;
-  min-width: 320px;
-  min-height: 100vh;
+  box-sizing: border-box;
 }
 
 h1 {
@@ -58,10 +47,10 @@ button:hover {
   color: #ffffff;
   text-shadow: 1px 1px 1px #060606;
 }
-input{
+input {
   background-color: #fff;
 }
-input:focus{
+input:focus {
   background-color: #fff;
 }
 
@@ -69,7 +58,17 @@ input:focus{
   :root {
     color: #213547;
     background-color: #ffffff;
+    background-image: linear-gradient(
+        rgba(215, 216, 228, 0.3),
+        rgba(164, 165, 190, 0.3)
+      ),
+      url("image/3d-stack-books_23-2151103673.jpg");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: left top;
+    background-size: cover;
   }
+
   a:hover {
     color: #747bff;
   }
