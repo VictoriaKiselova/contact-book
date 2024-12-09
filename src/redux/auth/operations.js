@@ -1,43 +1,70 @@
-import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-
-axios.defaults.baseURL = "https://connections-api.herokuapp.com";
+import { auth } from "../../../firebase";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+  signOut,
+  onAuthStateChanged,
+} from "firebase/auth";
 
 export const register = createAsyncThunk(
   "auth/register",
-  async (newUser, thunkAPI) => {
+  async ({ displayName, email, password }, thunkAPI) => {
     try {
-      const response = await axios.post("/users/signup", newUser);
-      axios.defaults.headers.common[
-        "Authorization"
-      ] = `Bearer ${response.data.token}`;
-      return response.data;
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+      await updateProfile(user, { displayName });
+      const idToken = await user.getIdToken();
+      return {
+        uid: user.uid,
+        displayName: user.displayName,
+        email: user.email,
+        token: idToken,
+      };
     } catch (error) {
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({
+        message: error.message,
+        code: error.code,
+      });
     }
   }
 );
 
 export const logIn = createAsyncThunk(
   "auth/login",
-  async (userInfo, thunkAPI) => {
+  async ({ email, password }, thunkAPI) => {
     try {
-      const response = await axios.post("/users/login", userInfo);
-      axios.defaults.headers.common[
-        "Authorization"
-      ] = `Bearer ${response.data.token}`;
-      return response.data;
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+      const idToken = await user.getIdToken();
+
+      return {
+        uid: user.uid,
+        displayName: user.displayName,
+        email: user.email,
+        token: idToken,
+      };
     } catch (error) {
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({
+        message: error.message,
+        code: error.code,
+      });
     }
   }
 );
 
 export const logOut = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   try {
-    const response = await axios.post("/users/logout");
-    axios.defaults.headers.common["Authorization"] = "";
-    return response.data;
+    await signOut(auth);
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
   }
@@ -46,18 +73,24 @@ export const logOut = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
 export const refreshUser = createAsyncThunk(
   "auth/refresh",
   async (_, thunkAPI) => {
-    const reduxState = thunkAPI.getState();
-    const savedToken = reduxState.auth.token;
-    axios.defaults.headers.common["Authorization"] = `Bearer ${savedToken}`;
-
-    const response = await axios.get("/users/current");
-    return response.data;
-  },
-  {
-    condition(_, thunkAPI) {
-      const reduxState = thunkAPI.getState();
-      const savedToken = reduxState.auth.token;
-      return savedToken !== null;
-    },
+    try {
+      return new Promise((resolve, reject) => {
+        onAuthStateChanged(auth, async user => {
+          if (user) {
+            const token = await user.getIdToken(true);
+            resolve({
+              uid: user.uid,
+              email: user.email,
+              displayName: user.displayName,
+              token,
+            });
+          } else {
+            reject("No user found");
+          }
+        });
+      });
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
   }
 );

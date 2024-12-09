@@ -1,50 +1,86 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-
-axios.defaults.baseURL = "https://connections-api.herokuapp.com";
+import { database, auth } from "../../../firebase";
+import { ref, get, set, remove } from "firebase/database";
 
 export const fetchContacts = createAsyncThunk(
-  "contacts/fetchAll",
+  "contacts/fetchContacts",
   async (_, thunkAPI) => {
+    const currentUser = auth.currentUser;
+
+    if (!currentUser) {
+      return thunkAPI.rejectWithValue("User is not authorized");
+    }
+
+    const userId = currentUser.uid;
+    const contactsRef = ref(database, `contacts/${userId}`);
     try {
-      const response = await axios.get("/contacts");
-      return response.data;
+      const snapshot = await get(contactsRef);
+      if (snapshot.exists()) {
+        const contactsArray = Object.entries(snapshot.val()).map(
+          ([id, contact]) => ({
+            id,
+            ...contact,
+          })
+        );
+        return contactsArray;
+      } else {
+        return [];
+      }
     } catch (error) {
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
+
 export const addContact = createAsyncThunk(
   "contacts/addContact",
-  async (values, thunkAPI) => {
+  async ({ name, number, id }, thunkAPI) => {
+    const currentUser = auth.currentUser;
+
+    if (!currentUser) {
+      return thunkAPI.rejectWithValue("User is not authorized");
+    }
+
+    const userId = currentUser.uid;
     try {
-      const response = await axios.post("contacts/", values);
-      return response.data;
+      await set(ref(database, `contacts/${userId}/${id}`), {
+        name: name,
+        number: number,
+      });
     } catch (error) {
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
+
 export const deleteContact = createAsyncThunk(
   "contacts/deleteContact",
-  async (contactId, thunkAPI) => {
+  async (id, thunkAPI) => {
+    const currentUser = auth.currentUser;
+
+    if (!currentUser) {
+      return thunkAPI.rejectWithValue("User is not authorized");
+    }
+
+    const userId = currentUser.uid;
     try {
-      const response = await axios.delete(`contacts/${contactId}`);
-      return response.data;
+      await remove(ref(database, `contacts/${userId}/${id}`));
+      return id;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
+
 export const updateContact = createAsyncThunk(
   "contacts/updateContact",
-  async (updatedData, thunkAPI) => {
+  async ({ id, name, number }, thunkAPI) => {
     try {
-      const response = await axios.patch(`contacts/${updatedData.id}`, {
-        name: updatedData.name,
-        number: updatedData.number,
+      await set(ref(database, `contacts/${id}`), {
+        name: name,
+        number: number,
       });
-      return response.data;
+      return { id, name, number };
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }

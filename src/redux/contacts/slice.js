@@ -5,7 +5,6 @@ import {
   deleteContact,
   updateContact,
 } from "../../redux/contacts/operations";
-import { logOut } from "../auth/operations";
 
 const contactsSlice = createSlice({
   name: "contacts",
@@ -46,15 +45,10 @@ const contactsSlice = createSlice({
       })
       .addCase(deleteContact.fulfilled, (state, action) => {
         state.loading = false;
-        state.items = state.items.filter(elem => elem.id !== action.payload.id);
+        state.items = state.items.filter(elem => elem.id !== action.payload);
       })
       .addCase(deleteContact.rejected, state => {
         state.error = true;
-        state.loading = false;
-      })
-      .addCase(logOut.fulfilled, state => {
-        state.items = [];
-        state.error = null;
         state.loading = false;
       })
       .addCase(updateContact.pending, state => {

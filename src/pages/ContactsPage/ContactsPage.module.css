@@ -44,6 +44,7 @@
   color: #000;
   border: 1px solid gray;
   margin-top: 3px;
+  transition: all 0.3s ease;
 }
 .input {
   padding: 5px 8px;
@@ -55,8 +56,9 @@
 }
 .title {
   color: #000;
-  font-size: 26px;
+  font-size: 18px;
   font-weight: bold;
+  line-height: 1.1;
   letter-spacing: 0.02em;
 }
 .inputSearch {
@@ -79,10 +81,6 @@
 .container {
   background-color: #fff;
   width: 300px;
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  justify-content: space-between;
   border: 1px solid black;
   border-radius: 5px;
   padding: 10px;
@@ -92,9 +90,15 @@
 }
 .contactItem {
   display: flex;
-  flex-direction: column;
   align-items: start;
-  gap: 6px;
+  justify-content: space-between;
+  gap: 10px;
+}
+.contactDate {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
 }
 .iconsUser {
   width: 20px;
@@ -120,6 +124,7 @@
 .buttonBox {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: end;
   gap: 6px;
 }
@@ -132,6 +137,7 @@
   border: none;
   border-radius: 3px;
   box-shadow: 5px 5px 8px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
 .iconChange {
   width: 20px;
@@ -152,6 +158,7 @@
   border-radius: 4px;
   box-shadow: 5px 5px 8px 5px rgba(0, 0, 0, 0.1);
   color: #000;
+  transition: all 0.3s ease;
 }
 .button:hover {
   text-shadow: 1px 1px 1px #000000;
@@ -174,6 +181,9 @@
   .input {
     font-size: 20px;
   }
+  .title {
+    font-size: 22px;
+  }
   .inputSearch {
     font-size: 20px;
     padding: 8px;
@@ -185,7 +195,7 @@
     padding: 12px 18px 12px 12px;
   }
   .contactItem {
-    gap: 8px;
+    flex-direction: row;
   }
   .iconsUser {
     width: 25px;
@@ -232,10 +242,14 @@
     padding: 5px 10px;
     font-size: 24px;
   }
+  .title {
+    font-size: 26px;
+  }
   .inputSearch {
     font-size: 24px;
     padding: 8px;
     width: 450px;
+    margin-top: 16px;
   }
   .contactListWrapper {
     gap: 18px;
@@ -243,16 +257,12 @@
   .container {
     width: 450px;
   }
-  .contactItem {
-    gap: 10px;
-  }
   .elements {
     font-size: 24px;
   }
   .buttonBox {
     gap: 12px;
   }
-
   .button {
     font-size: 24px;
   }

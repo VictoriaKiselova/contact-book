@@ -1,3 +1,4 @@
+import React from "react";
 import { ImAddressBook } from "react-icons/im";
 import css from "./HomePage.module.css";
 

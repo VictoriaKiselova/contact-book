@@ -10,6 +10,7 @@
   font-weight: 700;
   color: #000000;
   text-shadow: 0 0 1px #ffffff;
+  transition: all 0.3s ease;
 }
 .authNav:first-child::after {
   margin: 0 10px;

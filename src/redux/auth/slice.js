@@ -5,7 +5,7 @@ const authSlice = createSlice({
   name: "auth",
   initialState: {
     user: {
-      name: null,
+      displayName: null,
       email: null,
     },
     token: null,
@@ -19,9 +19,10 @@ const authSlice = createSlice({
         state.loading = true;
       })
       .addCase(register.fulfilled, (state, action) => {
-        state.user = action.payload.user;
+        state.user = action.payload;
         state.token = action.payload.token;
         state.isLoggedIn = true;
+        state.loading = false;
       })
       .addCase(register.rejected, state => {
         state.error = true;
@@ -32,9 +33,11 @@ const authSlice = createSlice({
         state.loading = true;
       })
       .addCase(logIn.fulfilled, (state, action) => {
-        state.user = action.payload.user;
+        state.user = action.payload;
         state.token = action.payload.token;
+        state.user.name = action.payload.displayName;
         state.isLoggedIn = true;
+        state.loading = false;
       })
       .addCase(logIn.rejected, state => {
         state.error = true;
@@ -46,11 +49,13 @@ const authSlice = createSlice({
       })
       .addCase(logOut.fulfilled, state => {
         state.user = {
-          name: null,
+          displayName: null,
           email: null,
         };
+        state.items = [];
         state.token = null;
         state.isLoggedIn = false;
+        state.loading = false;
       })
       .addCase(logOut.rejected, state => {
         state.error = true;
@@ -63,12 +68,14 @@ const authSlice = createSlice({
       })
       .addCase(refreshUser.fulfilled, (state, action) => {
         state.user = action.payload;
+        state.user.name = action.payload.displayName;
         state.isLoggedIn = true;
         state.isRefreshing = false;
         state.loading = false;
       })
-      .addCase(refreshUser.rejected, state => {
-        state.error = true;
+      .addCase(refreshUser.rejected, (state, action) => {
+        state.error = action.payload;
+        state.isRefreshing = false;
         state.loading = false;
       }),
 });

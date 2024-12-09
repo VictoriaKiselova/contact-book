@@ -1,3 +1,4 @@
+import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useDispatch } from "react-redux";
 import { logIn } from "../../redux/auth/operations";
@@ -7,7 +8,7 @@ import * as Yup from "yup";
 import css from "./LoginForm.module.css";
 
 const contactSchema = Yup.object().shape({
-  email: Yup.string().email().min(5, "Min 5 chars!").required("is required!"),
+  email: Yup.string().email().required("is required!"),
   password: Yup.string().min(6, "Min 6 chars!").required("is required!"),
 });
 
@@ -30,6 +31,19 @@ export default function LoginForm() {
       })
       .catch(error => {
         console.log(error);
+        toast.error(
+          "User not found, please check your username and password or register",
+          {
+            style: {
+              marginTop: "85px",
+              backgroundColor: "rgb(219, 137, 204)",
+              color: "#fff",
+              borderRadius: "20px 0",
+              border: "1px solid green",
+              padding: "10px",
+            },
+          }
+        );
       });
 
     actions.resetForm();

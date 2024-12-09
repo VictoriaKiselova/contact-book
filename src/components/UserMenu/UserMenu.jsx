@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import { IoMdExit } from "react-icons/io";
 import { useSelector, useDispatch } from "react-redux";
@@ -11,9 +12,10 @@ export default function UserMenu() {
   const handleLogout = () => {
     dispatch(logOut());
   };
+
   return (
     <div className={css.containerUserMenu}>
-      <p className={css.welcome}>Welcome, {user.name}</p>
+      <p className={css.welcome}>Welcome, {user.displayName}</p>
       <Link className={css.exit} onClick={handleLogout} to="/">
         <IoMdExit /> <span className={css.logOut}>Logout</span>
       </Link>
