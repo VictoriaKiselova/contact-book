@@ -34,14 +34,14 @@ const contactSchema = Yup.object().shape({
     .required("is required!"),
 });
 
-const formatPhoneNumber = number => {
-  const cleaned = ("" + number).replace(/\D/g, "");
-
-  if (cleaned.length === 10) {
-    return `${cleaned.slice(0, 3)}-${cleaned.slice(3, 6)}-${cleaned.slice(6)}`;
-  } else {
-    return "Incorrect number";
-  }
+const formatPhoneNumber = value => {
+  const cleaned = value.replace(/\D/g, "");
+  if (cleaned.length <= 3) return cleaned;
+  if (cleaned.length <= 6) return `${cleaned.slice(0, 3)}-${cleaned.slice(3)}`;
+  return `${cleaned.slice(0, 3)}-${cleaned.slice(3, 6)}-${cleaned.slice(
+    6,
+    10
+  )}`;
 };
 
 export default function ContactsPage() {
@@ -91,6 +91,10 @@ export default function ContactsPage() {
     setIsUpdate(true);
   };
 
+  const handlePhoneInputChange = (event, setFieldValue) => {
+    const formattedValue = formatPhoneNumber(event.target.value);
+    setFieldValue("number", formattedValue);
+  };
   return (
     <div className={css.wrapperContacts}>
       {isModalOpen && (
@@ -112,30 +116,37 @@ export default function ContactsPage() {
         initialValues={{ name: "", number: "" }}
         validationSchema={contactSchema}
         onSubmit={handleAdd}>
-        <Form className={css.formAddContact}>
-          <label htmlFor="nameInput" className={css.label}>
-            Name
-            <Field name="name" id="nameInput" className={css.input} />
-            <ErrorMessage name="name" className={css.error} component="span" />
-          </label>
-          <label htmlFor="numberInput" className={css.label}>
-            Number
-            <Field
-              type="tel"
-              name="number"
-              id="numberInput"
-              className={css.input}
-            />
-            <ErrorMessage
-              name="number"
-              className={css.error}
-              component="span"
-            />
-          </label>
-          <button type="submit" className={css.buttonAdd}>
-            <ImUserPlus /> Add contact
-          </button>
-        </Form>
+        {({ setFieldValue }) => (
+          <Form className={css.formAddContact}>
+            <label htmlFor="nameInput" className={css.label}>
+              Name
+              <Field name="name" id="nameInput" className={css.input} />
+              <ErrorMessage
+                name="name"
+                className={css.error}
+                component="span"
+              />
+            </label>
+            <label htmlFor="numberInput" className={css.label}>
+              Number
+              <Field
+                name="number"
+                id="numberInput"
+                className={css.input}
+                onChange={event => handlePhoneInputChange(event, setFieldValue)}
+              />
+              <ErrorMessage
+                name="number"
+                className={css.error}
+                component="span"
+              />
+            </label>
+            <button type="submit" className={css.buttonAdd}>
+              <ImUserPlus />
+              Add contact
+            </button>
+          </Form>
+        )}
       </Formik>
 
       <label htmlFor="valueContact" className={css.title}>
